@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LVL UP - Transformation et Agilite</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Bouton hamburger (mobile) -->
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+    <!-- Overlay sombre -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo-box">
+            <img src="assets/img/logo-lvlup.png" alt="Logo LVL UP">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#formations">Formation</a></li>
+                <li><a href="#planning">Planning</a></li>
+                <li><a href="#coaching">Coaching</a></li>
+                <li><a href="#apropos">À propos</a></li>
+                <li><a href="#arcade">LVL UP Adventure</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="#contact" class="btn-small">Nous contacter</a>
+        </div>
+    </aside>
+
+    <main class="content">
+        
+        <section id="accueil" class="hero">
+            <h1>Et si votre organisation passait au niveau supérieur ?</h1>
+            <p>Face à la complexité, la rigidité n'est plus une option. De la stratégie à l'exécution, LVL UP vous accompagne pour repenser vos façons de travailler. Que vous soyez un grand groupe ou une structure en pleine croissance, nous construisons ensemble une organisation adaptable grâce au pragmatisme du Lean et de l'Agilité.</p>
+            <div class="hero-buttons">
+                <a href="#formations" class="btn">Voir les formations</a>
+                <a href="#coaching" class="btn btn-outline">Découvrir le coaching</a>
+            </div>
+        </section>
+
+        <section id="formations" class="container bg-light">
+            <h2>Formations : Maîtrisez les fondamentaux</h2>
+            <p class="subtitle">Des concepts empiriques solides, une mise en pratique 100 % personnalisée.</p>
+
+            <div class="category-wrapper">
+                
+                <details class="formation-category" open>
+                    <summary>SAFe : Business Agility</summary>
+                    <div class="grid">
+                        <div class="card formation-card">
+                            <div class="badges">
+                                <span class="badge certifiant">Certifiant</span>
+                                <span class="badge niveau">Avancé</span>
+                                <span class="badge tarif">à partir de 670€ HT</span>
+                            </div>
+                            <h3>Leading SAFe® 6.0</h3>
+                            <p>Alignez la stratégie et l'exécution. Préparez-vous à mener une transformation Lean-Agile à l'échelle de l'entreprise.</p>
+                            <div class="card-footer">
+                                <button class="btn-small btn-outline open-modal" data-modal="modal-safe">Détails & Programme</button>
+                            </div>
+                        </div>
+
+                        <div class="card formation-card">
+                            <div class="badges">
+                                <span class="badge certifiant">Certifiant</span>
+                                <span class="badge niveau">Tous niveaux</span>
+                                <span class="badge tarif">à partir de 670€ HT</span>
+                            </div>
+                            <h3>SAFe® Hardware</h3>
+                            <p>Appliquez les principes agiles au développement de produits physiques. Réduisez votre time-to-market hors du logiciel.</p>
+                            <div class="card-footer">
+                                <button class="btn-small btn-outline open-modal" data-modal="modal-hardware">Détails & Programme</button>
+                            </div>
+                        </div>
+
+                        <div class="card formation-card">
+                            <div class="badges">
+                                <span class="badge certifiant">Certifiant</span>
+                                <span class="badge niveau">Tous niveaux</span>
+                                <span class="badge tarif">à partir de 670€ HT</span>
+                            </div>
+                            <h3>SAFe® PO/PM</h3>
+                            <p>Apprenez en plus sur le Product Management dans un environnement de travail agile à l'échelle.</p>
+                            <div class="card-footer">
+                                <button class="btn-small btn-outline open-modal" data-modal="modal-popm">Détails & Programme</button>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="formation-category">
+                    <summary>Lean & Excellence Opérationnelle</summary>
+                    <div class="grid">
+                        <div class="card formation-card">
+                            <div class="badges">
+                                <span class="badge pratique">Initiation</span>
+                                <span class="badge tarif">à partir de 150€ HT</span>
+                            </div>
+                            <h3>Introduction au Lean</h3>
+                            <p>Découvrez comment identifier et éliminer les gaspillages dans vos processus pour gagner en efficacité au quotidien.</p>
+                            <div class="card-footer">
+                                <button class="btn-small btn-outline open-modal" data-modal="modal-lean">Détails & Programme</button>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="formation-category">
+                    <summary>Objectifs & Stratégie</summary>
+                    <div class="grid">
+                        <div class="card formation-card">
+                            <div class="badges">
+                                <span class="badge niveau">Stratégie</span>
+                                <span class="badge tarif">à partir de 450€ HT</span>
+                            </div>
+                            <h3>Maîtriser les OKRs</h3>
+                            <p>Alignez vos équipes sur des objectifs clairs et mesurables. Passez d'une culture de la tâche à une culture du résultat.</p>
+                            <div class="card-footer">
+                                <button class="btn-small btn-outline open-modal" data-modal="modal-okr">Détails & Programme</button>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
+        <section id="planning" class="container">
+            <h2>Planning des sessions 2026</h2>
+            <p class="subtitle">Inscrivez-vous aux prochaines sessions inter-entreprises.</p>
+            
+            <div class="calendar-container">
+                <table class="planning-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Formation</th>
+                            <th>Format / Lieu</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="planning-body">
+                        <!-- Rempli automatiquement par assets/js/planning.js à partir du tableau SESSIONS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+
+        <div id="modal-safe" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Fiche Formation : Leading SAFe® 6.0</h2>
+                <div class="modal-info-bar">
+                    <span><strong>Durée :</strong> 2 jours (16h)</span>
+                    <span><strong>Format :</strong> Présentiel ou Distanciel</span>
+                </div>
+                <div class="modal-body">
+                    <h3>Programme </h3>
+                    <ol class="quick-program">
+                        <li><strong>L'ère du numérique et la Business Agility</strong></li>
+                        <li><strong>Le leadership Lean & Agile</strong></li>
+                        <li><strong>Comment coordonner la construction et la livraison de produits complexes à l'échelle</strong></li>
+                        <li><strong>Lean Portfolio Management</strong></li>
+                        <li><strong>Conduire le changement</strong></li>
+                    </ol>
+                    <button class="btn contact-from-modal" data-value="Formation" data-message="Bonjour, je souhaiterais recevoir un devis pour la certification Leading SAFe.">Demander un devis certifiant</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="modal-popm" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Fiche Formation : SAFe® PO/PM 6.0</h2>
+                <div class="modal-info-bar">
+                    <span><strong>Durée :</strong> 2 jours (16h)</span>
+                    <span><strong>Format :</strong> Présentiel ou Distanciel</span>
+                </div>
+                <div class="modal-body">
+                    <h3>Programme </h3>
+                    <ol class="quick-program">
+                        <li><strong>Rôles et responsabilités des PO et de la Gestion de Produit</strong></li>
+                        <li><strong>Etat d’esprit Lean-Agile, chaînes de valeur, responsabilités PO/Product Manager.</strong></li>
+                        <li><strong>Préparation au PI Planning (vision, roadmap, priorisation, backlog et ART Kanban)</strong></li>
+                        <li><strong>Le rôle du PO/PM pendant le PI Planning</strong></li>
+                        <li><strong>Exécuter un PI</strong></li>
+                    </ol>
+                    <button class="btn contact-from-modal" data-value="Formation" data-message="Bonjour, je souhaiterais recevoir un devis pour la certification SAFe PO/PM.">Demander un devis certifiant</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-hardware" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Fiche Formation : SAFe® Hardware 6.0</h2>
+                <div class="modal-info-bar">
+                    <span><strong>Durée :</strong> 3 jours</span>
+                    <span><strong>Format :</strong> Présentiel ou Distanciel</span>
+                </div>
+                <div class="modal-body">
+                    <h3>Programme Rapide</h3>
+                    <ol class="quick-program">
+                        <li><strong>Mindset Industriel</strong></li>
+                        <li><strong>Modélisation & Itérations</strong></li>
+                        <li><strong>Kanban HW</strong></li>
+                        <li><strong>Design for Change</strong></li>
+                    </ol>
+                    <button class="btn contact-from-modal" data-value="Formation" data-message="Bonjour, je suis intéressé par votre atelier Agilité Hardware. Pouvez-vous me recontacter pour discuter d'un format sur-mesure ?">Intéressé par le sur-mesure</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-lean" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Fiche Formation : Intro au Lean Management</h2>
+                <div class="modal-info-bar">
+                    <span><strong>Durée :</strong> 1 jour</span>
+                    <span><strong>Format :</strong> Présentiel recommandé</span>
+                </div>
+                <div class="modal-body">
+                    <h3>Programme Rapide</h3>
+                    <ol class="quick-program">
+                        <li><strong>Les 3 M</strong></li>
+                        <li><strong>VSM (Value Stream Mapping)</strong></li>
+                        <li><strong>Gemba Walk</strong></li>
+                        <li><strong>Amélioration Continue</strong></li>
+                    </ol>
+                    <button class="btn contact-from-modal" data-value="Formation" data-message="Bonjour, je souhaite obtenir le programme complet de la formation Introduction au Lean.">Demander le programme complet</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-okr" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h2>Fiche Formation : Maîtriser les OKRs</h2>
+                <div class="modal-info-bar">
+                    <span><strong>Durée :</strong> 2 demi-journées</span>
+                    <span><strong>Format :</strong> Coaching de groupe</span>
+                </div>
+                <div class="modal-body">
+                    <h3>Programme Rapide</h3>
+                    <ol class="quick-program">
+                        <li><strong>Stratégie vs Exécution</strong></li>
+                        <li><strong>Écriture d'OKRs</strong></li>
+                        <li><strong>Cycles de vie</strong></li>
+                        <li><strong>Alignement</strong></li>
+                    </ol>
+                    <button class="btn contact-from-modal" data-value="Formation" data-message="Bonjour, nous souhaiterions mettre en place des OKRs dans notre organisation. Pouvons-nous échanger sur votre coaching ?">Discuter de mon besoin stratégique</button>
+                </div>
+            </div>
+        </div>
+
+        <section id="coaching" class="container">
+            <h2>Coaching & Conseil : L'Agilité en action</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Audit & Diagnostic</h3>
+                    <p>Immersion dans votre réalité opérationnelle pour cartographier l'existant et identifier les points de friction.</p>
+                </div>
+                <div class="card">
+                    <h3>Transformation Organisationnelle</h3>
+                    <p>Un accompagnement global pour repenser vos structures et fluidifier la communication.</p>
+                </div>
+                <div class="card">
+                    <h3>Coaching Dirigeants</h3>
+                    <p>Adoptez la posture adéquate pour soutenir l'agilité, déléguer efficacement et piloter par la valeur.</p>
+                </div>
+                <div class="card">
+                    <h3>Interventions Ciblées</h3>
+                    <p>Déblocage de situations critiques sur le terrain pour retrouver de la vélocité.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="apropos" class="container bg-light">
+            <h2>À propos : L'approche LVL UP</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p><strong>Des concepts théoriques solides pour une application 100% pragmatique.</strong></p>
+                    <p>Fort de <strong>plus de 15 ans d'expérience</strong> sur le terrain, j'ai forgé une conviction : les meilleurs frameworks ne servent à rien s'ils ne sont pas adaptés à vos équipes.</p>
+                    <p>Mon objectif est d'aligner votre vision stratégique avec votre exécution opérationnelle, en cassant les silos pour vous rendre autonome.</p>
+                    <div class="certifications-box">
+                        <h4>Certifications & Expertises</h4>
+                        <div class="certif-tags">
+                            <span>SAFe A-SPC</span><span>Six Sigma</span><span>ICP-CAT</span><span>ICP-ENT</span><span>EBAS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="assets/img/photo-profil.png" alt="Portrait" width="180" height="200" style="border-radius: 8px; object-fit: cover; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 6px solid white;">
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== BUSINESS AGILITY QUEST ===== -->
+        <!-- ===== BUSINESS AGILITY QUEST ===== -->
+        <!-- ===== LVL UP ADVENTURE ===== -->
+        <section id="arcade" style="background:#070b14; padding:3rem 0; position:relative; overflow:hidden;">
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.15) 2px,rgba(0,0,0,0.15) 4px);pointer-events:none;"></div>
+
+          <div style="max-width:960px;margin:0 auto;padding:0 1.25rem;position:relative;">
+
+            <!-- HEADER -->
+            <div style="text-align:center;margin-bottom:2rem;">
+              <div style="font-family:monospace;font-size:0.62rem;color:#0ea5e9;letter-spacing:4px;text-transform:uppercase;margin-bottom:0.6rem;opacity:0.7;">— Business Agility Quest —</div>
+              <h2 style="font-family:monospace;color:#fff;font-size:2.2rem;font-weight:900;letter-spacing:2px;text-shadow:0 0 24px #0ea5e980;margin-bottom:0.4rem;">LVL UP <span style="color:#0ea5e9;">ADVENTURE</span></h2>
+              <p style="color:#475569;font-size:0.85rem;font-family:monospace;letter-spacing:1px;">GRAVISSEZ LA MONTAGNE. DEVENEZ AGILE.</p>
+            </div>
+
+            <!-- XP BAR -->
+            <div style="background:#0d1424;border:1px solid #1e3a5f;padding:0.6rem 1rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.75rem;font-family:monospace;">
+              <span style="color:#0ea5e9;font-size:0.72rem;font-weight:700;letter-spacing:2px;white-space:nowrap;">XP</span>
+              <div style="flex:1;background:#0a0f1e;border:1px solid #1e293b;height:10px;position:relative;overflow:hidden;">
+                <div id="baq-xp-bar" style="height:100%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);width:0%;transition:width 0.8s;box-shadow:0 0 6px #0ea5e9;"></div>
+              </div>
+              <span id="baq-xp-text" style="color:#0ea5e9;font-size:0.72rem;font-weight:700;white-space:nowrap;">0 / 18</span>
+            </div>
+
+            <!-- MAP SVG + GAME PANEL -->
+            <div style="display:flex;flex-direction:column;gap:1rem;">
+
+              <!-- MOUNTAIN MAP (SVG) -->
+              <div style="background:#0d1424;border:1px solid #1e3a5f;padding:0.75rem;border-radius:4px;">
+                <svg id="baq-svg-map" viewBox="0 0 900 180" style="width:100%;display:block;cursor:pointer;" preserveAspectRatio="xMidYMid meet">
+                  <defs>
+                    <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#04080f"/>
+                      <stop offset="100%" stop-color="#0a1628"/>
+                    </linearGradient>
+                  </defs>
+
+                  <!-- Ciel -->
+                  <rect width="900" height="180" fill="url(#skyG)"/>
+
+                  <!-- Étoiles pixel 2×2 -->
+                  <rect x="30"  y="8"  width="2" height="2" fill="#fff" opacity="0.7"/>
+                  <rect x="110" y="5"  width="2" height="2" fill="#fff" opacity="0.5"/>
+                  <rect x="200" y="12" width="2" height="2" fill="#fff" opacity="0.6"/>
+                  <rect x="290" y="4"  width="2" height="2" fill="#fff" opacity="0.4"/>
+                  <rect x="380" y="10" width="2" height="2" fill="#fff" opacity="0.6"/>
+                  <rect x="460" y="6"  width="2" height="2" fill="#fff" opacity="0.5"/>
+                  <rect x="560" y="14" width="2" height="2" fill="#fff" opacity="0.7"/>
+                  <rect x="650" y="7"  width="2" height="2" fill="#fff" opacity="0.4"/>
+                  <rect x="740" y="11" width="2" height="2" fill="#fff" opacity="0.6"/>
+                  <rect x="840" y="5"  width="2" height="2" fill="#fff" opacity="0.5"/>
+
+                  <!-- Lune pixel -->
+                  <rect x="855" y="8"  width="18" height="18" fill="#c8d8e8" opacity="0.75" rx="2"/>
+                  <rect x="859" y="6"  width="16" height="16" fill="#0a1628"/>
+
+                  <!-- Montagnes arrière-plan (silhouette bleue foncée) -->
+                  <polygon points="0,180 0,118 40,80 80,100 120,65 160,88 200,55 250,78 300,48 350,72 400,42 450,68 500,38 550,62 600,36 650,58 700,32 750,55 800,30 850,50 900,28 900,180" fill="#0b1520"/>
+
+                  <!-- ═══ MONTAGNE PRINCIPALE ═══ -->
+                  <!-- Corps principal - versant qui monte de gauche à droite -->
+                  <polygon points="0,180 0,162 60,148 120,152 180,138 240,142 300,126 360,130 420,114 480,118 540,100 600,104 660,88 720,92 780,74 840,62 870,50 900,58 900,180" fill="#1a2838"/>
+
+                  <!-- Pic 1 (bas gauche ~nœud 0-1) -->
+                  <polygon points="60,148 100,118 140,148" fill="#1e3348"/>
+                  <rect x="94"  y="118" width="12" height="4" fill="#dde8f0" opacity="0.85"/>
+                  <rect x="90"  y="122" width="16" height="3" fill="#dde8f0" opacity="0.6"/>
+
+                  <!-- Pic 2 (milieu ~nœud 2) -->
+                  <polygon points="260,130 310,92 360,130" fill="#243040"/>
+                  <rect x="303" y="92"  width="14" height="5" fill="#dde8f0" opacity="0.9"/>
+                  <rect x="299" y="97"  width="18" height="4" fill="#dde8f0" opacity="0.65"/>
+
+                  <!-- Pic 3 (haut droite ~nœud 3-4) -->
+                  <polygon points="520,102 570,62 620,102" fill="#2a3a50"/>
+                  <rect x="563" y="62"  width="14" height="5" fill="#dde8f0" opacity="0.9"/>
+                  <rect x="559" y="67"  width="18" height="4" fill="#dde8f0" opacity="0.65"/>
+
+                  <!-- SOMMET PRINCIPAL (nœud 5) -->
+                  <polygon points="800,74 845,20 890,60" fill="#2e4058"/>
+                  <!-- Neige sommet - blocs pixel nets -->
+                  <rect x="836" y="20" width="18" height="6"  fill="#e8f0f8" opacity="0.98"/>
+                  <rect x="832" y="26" width="24" height="5"  fill="#e8f0f8" opacity="0.88"/>
+                  <rect x="828" y="31" width="28" height="4"  fill="#e8f0f8" opacity="0.65"/>
+                  <rect x="824" y="35" width="32" height="3"  fill="#e8f0f8" opacity="0.4"/>
+
+                  <!-- Sol / base herbe pixel -->
+                  <rect x="0" y="168" width="900" height="4"  fill="#1a3a2a"/>
+                  <rect x="0" y="172" width="900" height="8"  fill="#142e20"/>
+
+                  <!-- Arbres pixel (base gauche) -->
+                  <rect x="18"  y="158" width="4"  height="12" fill="#0d2010"/>
+                  <rect x="12"  y="148" width="12" height="12" fill="#155220"/>
+                  <rect x="10"  y="140" width="8"  height="10" fill="#1a6628"/>
+                  <rect x="44"  y="160" width="4"  height="10" fill="#0d2010"/>
+                  <rect x="40"  y="152" width="10" height="10" fill="#155220"/>
+                  <rect x="38"  y="145" width="6"  height="9"  fill="#1a6628"/>
+
+                  <!-- Chemin entre nœuds (injecté JS) -->
+                  <g id="baq-path-segments"></g>
+
+                  <!-- Nœuds (injectés JS) -->
+                  <g id="baq-nodes"></g>
+
+                  <!-- Personnage pixel art (injecté JS) -->
+                  <g id="baq-character"></g>
+                </svg>
+                <div style="font-family:monospace;font-size:0.58rem;color:#1e3a5f;text-align:center;margin-top:0.4rem;letter-spacing:1px;">CLIQUEZ UN NIVEAU POUR JOUER</div>
+              </div>
+
+              <div id="baq-game-area" style="background:#0d1424;border:1px solid #1e3a5f;border-radius:4px;min-height:380px;">
+                <div id="baq-game-content" style="padding:1.25rem;">
+                  <div style="text-align:center;padding:3rem 1rem;">
+                    <div style="font-family:monospace;font-size:0.85rem;color:#1e3a5f;letter-spacing:2px;margin-bottom:0.75rem;">_ _ _ _ _ _ _ _ _ _</div>
+                    <div style="font-family:monospace;font-size:0.82rem;color:#334155;letter-spacing:1px;">SELECTIONNEZ UN NIVEAU SUR LA CARTE</div>
+                    <div style="font-family:monospace;font-size:0.68rem;color:#1e293b;margin-top:0.75rem;">▼ PRESS START ▼</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" class="container">
+            <h2>Parlons de vos enjeux</h2>
+            <div class="contact-form-container">
+                <form action="https://formspree.io/f/mwvwejlb" method="POST" id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nom / Entreprise</label>
+                        <input type="text" id="name" name="name" placeholder="Ex: Jean Dupont - Société X" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email professionnel</label>
+                        <input type="email" id="email" name="email" placeholder="jean.dupont@entreprise.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sujet">Quel est votre besoin principal ?</label>
+                        <select id="sujet" name="sujet" required>
+                            <option value="" disabled selected>Choisissez une option...</option>
+                            <option value="Formation">Formation (SAFe, Lean, OKR...)</option>
+                            <option value="Coaching">Coaching / Transformation</option>
+                            <option value="Audit">Audit & Diagnostic d'équipe</option>
+                            <option value="Autre">Autre demande</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Votre message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Décrivez votre besoin..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Envoyer le message</button>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 LVL UP - Tous droits réservés</p>
+        </footer>
+    </main>
+
+    <script src="assets/js/site.js"></script>
+    <script src="assets/js/planning.js"></script>
+    <script src="assets/js/arcade.js"></script>
+</body>
+</html>
