@@ -45,6 +45,16 @@ contactFromModalBtns.forEach(btn => {
 const chips = document.querySelectorAll('.chip');
 const formationCards = document.querySelectorAll('.formation-card');
 
+// Compteurs calculés à partir des cartes réellement présentes (pas de nombre en dur à maintenir)
+chips.forEach(chip => {
+    const filter = chip.getAttribute('data-filter');
+    const label = chip.getAttribute('data-label');
+    const count = filter === 'all'
+        ? formationCards.length
+        : document.querySelectorAll(`.formation-card[data-category="${filter}"]`).length;
+    chip.textContent = `${label} · ${count}`;
+});
+
 chips.forEach(chip => {
     chip.addEventListener('click', () => {
         chips.forEach(c => c.classList.remove('active'));

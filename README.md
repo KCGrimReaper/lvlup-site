@@ -26,6 +26,13 @@ const SESSIONS = [
 
 La table se reconstruit toute seule au chargement de la page.
 
+## Ajouter une formation
+
+Dans `index.html`, section `#formations`, copie une `.formation-card` existante,
+mets `data-category` sur `safe`, `lean` ou `strategie` (ou une nouvelle catégorie —
+ajoute alors le chip correspondant dans `.filter-chips`). Les compteurs sur les
+chips ("SAFe · 3") se recalculent automatiquement, rien à toucher côté JS.
+
 ## Déploiement (à faire une seule fois)
 
 1. Crée un repo vide sur GitHub (ex: `lvlup-site`), sans README/licence.
