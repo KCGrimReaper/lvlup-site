@@ -7,12 +7,15 @@
 // Pour SUPPRIMER une formation : supprime son objet.
 // Pour la MODIFIER : édite ses champs, rien d'autre à toucher.
 //
-// category : "safe" | "lean" | "strategie" (ou une nouvelle catégorie — ajoute
-// alors le chip correspondant dans index.html, section .filter-chips)
+// category / categoryLabel : identifiant + libellé affiché. Les filtres en
+// haut de la section formations se génèrent automatiquement à partir des
+// catégories présentes ici — une nouvelle catégorie crée son propre filtre
+// sans rien toucher ailleurs.
 const FORMATIONS = [
     {
         id: "safe",
         category: "safe",
+        categoryLabel: "SAFe",
         title: "Leading SAFe® 6.0",
         badges: [
             { type: "certifiant", label: "Certifiant" },
@@ -35,6 +38,7 @@ const FORMATIONS = [
     {
         id: "hardware",
         category: "safe",
+        categoryLabel: "SAFe",
         title: "SAFe® Hardware",
         badges: [
             { type: "certifiant", label: "Certifiant" },
@@ -56,6 +60,7 @@ const FORMATIONS = [
     {
         id: "popm",
         category: "safe",
+        categoryLabel: "SAFe",
         title: "SAFe® PO/PM",
         badges: [
             { type: "certifiant", label: "Certifiant" },
@@ -78,6 +83,7 @@ const FORMATIONS = [
     {
         id: "lean",
         category: "lean",
+        categoryLabel: "Lean",
         title: "Introduction au Lean",
         badges: [
             { type: "pratique", label: "Initiation" },
@@ -98,6 +104,7 @@ const FORMATIONS = [
     {
         id: "okr",
         category: "strategie",
+        categoryLabel: "Stratégie",
         title: "Maîtriser les OKRs",
         badges: [
             { type: "niveau", label: "Stratégie" },

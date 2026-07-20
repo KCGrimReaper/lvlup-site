@@ -43,23 +43,34 @@ function renderFormations() {
             </div>
         </div>`).join('');
 
-    // --- Chips de filtre : compteurs + tri ---
-    const chips = document.querySelectorAll('.chip');
-    const cards = grid.querySelectorAll('.formation-card');
-    chips.forEach(chip => {
-        const filter = chip.getAttribute('data-filter');
-        const label = chip.getAttribute('data-label');
-        const count = filter === 'all' ? FORMATIONS.length : FORMATIONS.filter(f => f.category === filter).length;
-        chip.textContent = `${label} · ${count}`;
-        chip.onclick = () => {
-            chips.forEach(c => c.classList.remove('active'));
-            chip.classList.add('active');
-            cards.forEach(card => {
-                const match = filter === 'all' || card.getAttribute('data-category') === filter;
-                card.classList.toggle('hidden', !match);
-            });
-        };
-    });
+    // --- Chips de filtre : générés depuis les catégories présentes dans les données ---
+    const chipsContainer = document.getElementById('filter-chips');
+    if (chipsContainer) {
+        const seen = new Map(); // category -> categoryLabel, dans l'ordre d'apparition
+        FORMATIONS.forEach(f => { if (!seen.has(f.category)) seen.set(f.category, f.categoryLabel || f.category); });
+
+        const chipDefs = [{ filter: 'all', label: 'Toutes' }, ...[...seen.entries()].map(([cat, label]) => ({ filter: cat, label }))];
+
+        chipsContainer.innerHTML = chipDefs.map((c, i) =>
+            `<button class="chip${i === 0 ? ' active' : ''}" data-filter="${c.filter}">${c.label}</button>`
+        ).join('');
+
+        const chips = chipsContainer.querySelectorAll('.chip');
+        const cards = grid.querySelectorAll('.formation-card');
+        chipDefs.forEach((c, i) => {
+            const chip = chips[i];
+            const count = c.filter === 'all' ? FORMATIONS.length : FORMATIONS.filter(f => f.category === c.filter).length;
+            chip.textContent = `${c.label} · ${count}`;
+            chip.onclick = () => {
+                chips.forEach(ch => ch.classList.remove('active'));
+                chip.classList.add('active');
+                cards.forEach(card => {
+                    const match = c.filter === 'all' || card.getAttribute('data-category') === c.filter;
+                    card.classList.toggle('hidden', !match);
+                });
+            };
+        });
+    }
 }
 
 document.addEventListener('DOMContentLoaded', renderFormations);

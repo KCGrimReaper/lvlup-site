@@ -102,11 +102,10 @@
                 <div class="form-group">
                     <label>Catégorie</label>
                     <select id="f-category">
-                        <option value="safe">SAFe</option>
-                        <option value="lean">Lean</option>
-                        <option value="strategie">Stratégie</option>
+                        <option value="__new__">+ Nouvelle catégorie…</option>
                     </select>
-                    <div class="form-hint">Une nouvelle catégorie ? Dis-le moi, j'ajoute le filtre correspondant.</div>
+                    <input type="text" id="f-category-new" placeholder="Nom de la nouvelle catégorie, ex: Kanban" style="margin-top:0.5rem; display:none;">
+                    <div class="form-hint">Une nouvelle catégorie crée automatiquement son propre filtre sur le site.</div>
                 </div>
                 <div class="form-group">
                     <label>Tarif affiché</label>
@@ -162,18 +161,19 @@
         <h2>Code à copier dans <code>assets/js/formations-data.js</code></h2>
         <textarea id="output-code" readonly></textarea>
         <div class="copy-row">
-            <button class="btn" id="copy-btn">Copier le code</button>
+            <button class="btn" id="download-btn">Télécharger le fichier</button>
+            <button class="btn btn-secondary" id="copy-btn">Copier le code</button>
             <span class="copy-confirm" id="copy-confirm">✓ Copié !</span>
         </div>
         <div class="instructions">
-            <strong>Pour publier ce changement :</strong>
+            <strong>Option recommandée — télécharger :</strong>
             <ol>
-                <li>Clique <strong>« Copier le code »</strong> ci-dessus.</li>
-                <li>Ouvre <code>assets/js/formations-data.js</code> dans VS Code.</li>
-                <li>Sélectionne tout le contenu (<code>Ctrl+A</code>) et colle (<code>Ctrl+V</code>) pour remplacer.</li>
-                <li>Sauvegarde (<code>Ctrl+S</code>).</li>
-                <li>Dans le terminal : <code>git add -A && git commit -m "Mise à jour catalogue" && git push</code></li>
+                <li>Clique <strong>« Télécharger le fichier »</strong> ci-dessus. Ça enregistre <code>formations-data.js</code> dans ton dossier Téléchargements.</li>
+                <li>Déplace ce fichier dans <code>assets/js/</code> de ton dossier <code>lvlup-site</code>, en écrasant l'ancien (l'Explorateur te demandera de confirmer le remplacement — accepte).</li>
+                <li>Dans le terminal, dans le dossier du projet : <code>git add -A && git commit -m "Mise à jour catalogue" && git push</code></li>
             </ol>
+            <strong>Option copier-coller</strong> (si tu préfères) : clique « Copier le code », ouvre <code>assets/js/formations-data.js</code> dans VS Code, sélectionne tout (<code>Ctrl+A</code>), colle (<code>Ctrl+V</code>), sauvegarde. <em>Attention à bien ouvrir <code>formations-data.js</code> et pas un autre fichier — c'est la source la plus fréquente de casse.</em>
+            <br><br>
             Tu peux aussi coller ce code directement dans le chat à Claude et lui demander de sauvegarder et pousser pour toi.
         </div>
     </div>
@@ -209,12 +209,28 @@ function slugify(str) {
         .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 }
 
+function populateCategorySelect() {
+    const select = document.getElementById('f-category');
+    const current = select.value;
+    const seen = new Map();
+    FORMATIONS.forEach(f => { if (!seen.has(f.category)) seen.set(f.category, f.categoryLabel || f.category); });
+    select.innerHTML = [...seen.entries()].map(([cat, label]) => `<option value="${cat}">${label}</option>`).join('')
+        + '<option value="__new__">+ Nouvelle catégorie…</option>';
+    if ([...seen.keys()].includes(current)) select.value = current;
+}
+
+document.getElementById('f-category').addEventListener('change', function() {
+    document.getElementById('f-category-new').style.display = this.value === '__new__' ? 'block' : 'none';
+});
+
 function resetForm() {
     document.getElementById('formation-form').reset();
     document.getElementById('steps-container').innerHTML = '';
     addStepInput('');
     editingId = null;
     document.getElementById('form-title').textContent = 'Nouvelle formation';
+    populateCategorySelect();
+    document.getElementById('f-category-new').style.display = 'none';
 }
 
 function addStepInput(value) {
@@ -244,7 +260,9 @@ window.editFormation = function(id) {
     editingId = id;
     document.getElementById('form-title').textContent = 'Modifier : ' + f.title;
     document.getElementById('f-title').value = f.title;
+    populateCategorySelect();
     document.getElementById('f-category').value = f.category;
+    document.getElementById('f-category-new').style.display = 'none';
     document.getElementById('f-description').value = f.description;
     document.getElementById('f-duree').value = f.duree;
     document.getElementById('f-format').value = f.format;
@@ -278,7 +296,17 @@ window.deleteFormation = function(id) {
 document.getElementById('formation-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const title = document.getElementById('f-title').value.trim();
-    const category = document.getElementById('f-category').value;
+    const categorySelectVal = document.getElementById('f-category').value;
+    let category, categoryLabel;
+    if (categorySelectVal === '__new__') {
+        categoryLabel = document.getElementById('f-category-new').value.trim();
+        if (!categoryLabel) { alert('Donne un nom à la nouvelle catégorie.'); return; }
+        category = slugify(categoryLabel);
+    } else {
+        category = categorySelectVal;
+        const existing = FORMATIONS.find(f => f.category === category);
+        categoryLabel = existing ? existing.categoryLabel : category;
+    }
     const description = document.getElementById('f-description').value.trim();
     const duree = document.getElementById('f-duree').value.trim();
     const format = document.getElementById('f-format').value.trim();
@@ -296,7 +324,7 @@ document.getElementById('formation-form').addEventListener('submit', function(e)
 
     const id = editingId || slugify(title) || ('formation-' + Date.now());
 
-    const formation = { id, category, title, badges, description, duree, format, programme: steps, ctaLabel, ctaMessage };
+    const formation = { id, category, categoryLabel, title, badges, description, duree, format, programme: steps, ctaLabel, ctaMessage };
 
     if (editingId) {
         const idx = FORMATIONS.findIndex(x => x.id === editingId);
@@ -326,6 +354,7 @@ function generateOutput() {
         lines.push('    {');
         lines.push(`        id: ${jsString(f.id)},`);
         lines.push(`        category: ${jsString(f.category)},`);
+        lines.push(`        categoryLabel: ${jsString(f.categoryLabel || f.category)},`);
         lines.push(`        title: ${jsString(f.title)},`);
         lines.push('        badges: [');
         f.badges.forEach(b => lines.push(`            { type: ${jsString(b.type)}, label: ${jsString(b.label)} },`));
@@ -355,9 +384,24 @@ document.getElementById('copy-btn').addEventListener('click', () => {
     });
 });
 
+document.getElementById('download-btn').addEventListener('click', () => {
+    const content = document.getElementById('output-code').value;
+    const blob = new Blob([content], { type: 'text/javascript' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'formations-data.js';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+});
+
 // Init
 addStepInput('');
+populateCategorySelect();
 renderList();
+generateOutput();
 </script>
 </body>
 </html>
