@@ -26,12 +26,21 @@ const SESSIONS = [
 
 La table se reconstruit toute seule au chargement de la page.
 
-## Ajouter une formation
+## Ajouter / modifier / supprimer une formation
 
-Dans `index.html`, section `#formations`, copie une `.formation-card` existante,
-mets `data-category` sur `safe`, `lean` ou `strategie` (ou une nouvelle catégorie —
-ajoute alors le chip correspondant dans `.filter-chips`). Les compteurs sur les
-chips ("SAFe · 3") se recalculent automatiquement, rien à toucher côté JS.
+Tout se passe dans `assets/js/formations.js`, tableau `FORMATIONS` en haut du
+fichier. Chaque formation est un seul objet — la carte dans la grille **et**
+sa fiche modale (durée, format, programme, bouton de contact) sont générées
+automatiquement à partir de ce même objet, rien à dupliquer.
+
+- **Ajouter** : copie un objet existant, donne-lui un `id` unique, remplis les champs.
+- **Modifier** : édite les champs de l'objet concerné.
+- **Supprimer** : supprime l'objet.
+
+`category` doit être `safe`, `lean` ou `strategie` pour matcher un chip de
+filtre existant. Pour une nouvelle catégorie, ajoute le chip correspondant
+dans `index.html` (section `.filter-chips`) — les compteurs ("SAFe · 3") se
+recalculent tout seuls, aucune autre modif nécessaire.
 
 ## Déploiement (à faire une seule fois)
 

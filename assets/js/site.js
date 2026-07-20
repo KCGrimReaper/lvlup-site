@@ -2,69 +2,37 @@
 // SITE LVL UP — Navigation, modales, formulaire
 // =============================================
 
-// --- Modales formations ---
-const modals = document.querySelectorAll('.modal');
-const openBtns = document.querySelectorAll('.open-modal');
-const closeBtns = document.querySelectorAll('.close-modal');
-const contactFromModalBtns = document.querySelectorAll('.contact-from-modal');
+// --- Modales (délégation : fonctionne même pour les modales générées
+//     dynamiquement par formations.js, peu importe l'ordre de chargement) ---
 const messageTextarea = document.getElementById('message');
 const subjectSelect = document.getElementById('sujet');
 
-openBtns.forEach(btn => {
-    btn.onclick = function() {
-        document.getElementById(this.getAttribute('data-modal')).style.display = "block";
-        document.body.style.overflow = "hidden";
+document.addEventListener('click', function(e) {
+    const openBtn = e.target.closest('.open-modal');
+    if (openBtn) {
+        const modal = document.getElementById(openBtn.getAttribute('data-modal'));
+        if (modal) { modal.style.display = "block"; document.body.style.overflow = "hidden"; }
+        return;
     }
-});
-
-closeBtns.forEach(btn => {
-    btn.onclick = function() {
-        this.closest('.modal').style.display = "none";
+    const closeBtn = e.target.closest('.close-modal');
+    if (closeBtn) {
+        closeBtn.closest('.modal').style.display = "none";
         document.body.style.overflow = "auto";
+        return;
     }
-});
-
-window.onclick = function(e) {
     if (e.target.classList.contains('modal')) {
         e.target.style.display = "none";
         document.body.style.overflow = "auto";
+        return;
     }
-}
-
-contactFromModalBtns.forEach(btn => {
-    btn.onclick = function() {
-        subjectSelect.value = this.getAttribute('data-value');
-        messageTextarea.value = this.getAttribute('data-message');
-        modals.forEach(m => m.style.display = "none");
+    const contactBtn = e.target.closest('.contact-from-modal');
+    if (contactBtn) {
+        subjectSelect.value = contactBtn.getAttribute('data-value');
+        messageTextarea.value = contactBtn.getAttribute('data-message');
+        document.querySelectorAll('.modal').forEach(m => m.style.display = "none");
         document.body.style.overflow = "auto";
         document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
     }
-});
-
-// --- Filtres formations ---
-const chips = document.querySelectorAll('.chip');
-const formationCards = document.querySelectorAll('.formation-card');
-
-// Compteurs calculés à partir des cartes réellement présentes (pas de nombre en dur à maintenir)
-chips.forEach(chip => {
-    const filter = chip.getAttribute('data-filter');
-    const label = chip.getAttribute('data-label');
-    const count = filter === 'all'
-        ? formationCards.length
-        : document.querySelectorAll(`.formation-card[data-category="${filter}"]`).length;
-    chip.textContent = `${label} · ${count}`;
-});
-
-chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        const filter = chip.getAttribute('data-filter');
-        formationCards.forEach(card => {
-            const match = filter === 'all' || card.getAttribute('data-category') === filter;
-            card.classList.toggle('hidden', !match);
-        });
-    });
 });
 
 // --- Navigation smooth scroll ---
