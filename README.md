@@ -8,7 +8,8 @@ admin.html                 -> outil de gestion du catalogue (formulaire, sans co
 assets/
   css/style.css            -> tous les styles
   js/site.js               -> nav, modales, formulaire, menu mobile
-  js/planning.js           -> table du planning des sessions (voir plus bas)
+  js/planning-data.js      -> planning des sessions (données à éditer)
+  js/planning-render.js    -> affichage du planning (ne pas éditer)
   js/formations-data.js    -> catalogue de formations (données à éditer)
   js/formations-render.js  -> affichage du catalogue (ne pas éditer)
   img/                     -> logo, photo
@@ -16,17 +17,11 @@ assets/
 
 ## Mettre à jour le planning des sessions
 
-Plus besoin de toucher au HTML. Ouvre `assets/js/planning.js` et édite le
-tableau `SESSIONS` en haut du fichier :
+**Sans toucher au code** : ouvre `admin.html` (Live Server), section "Planning
+des sessions" en bas de page. Formulaire identique à celui des formations.
 
-```js
-const SESSIONS = [
-  { date: "18 - 19 Mai", formation: "Leading SAFe® 6.0", format: "Paris / Présentiel", status: "ouvert" },
-  // status: "ouvert" -> bouton "S'inscrire" | "complet" -> "Session complète"
-];
-```
-
-La table se reconstruit toute seule au chargement de la page.
+**Pour un développeur** : les données vivent dans `assets/js/planning-data.js`,
+tableau `SESSIONS`. `assets/js/planning-render.js` les affiche, ne pas y toucher.
 
 ## Ajouter / modifier / supprimer une formation
 

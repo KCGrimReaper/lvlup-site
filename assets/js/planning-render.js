@@ -1,14 +1,10 @@
 // =============================================
-// PLANNING DES SESSIONS — source de données unique
+// ⚠️ NE COLLE JAMAIS LE CODE GÉNÉRÉ PAR admin.html ICI ⚠️
+// (ça va dans planning-data.js, pas dans ce fichier)
 // =============================================
-// Pour ajouter / modifier une session : édite ce tableau, rien d'autre.
-// status: "ouvert" -> bouton "S'inscrire" | "complet" -> mention "Session complète"
-const SESSIONS = [
-    { date: "20 - 21 Avril", formation: "Leading SAFe® 6.0", format: "Distanciel", status: "complet" },
-    { date: "18 - 19 Mai",   formation: "Leading SAFe® 6.0", format: "Paris / Présentiel", status: "ouvert" },
-    { date: "1 - 2 Juin",    formation: "SAFe® PO/PM",       format: "Distanciel", status: "complet" },
-    { date: "22 - 23 Juin",  formation: "Leading SAFe® 6.0", format: "Distanciel", status: "ouvert" },
-];
+// AFFICHAGE DU PLANNING DES SESSIONS
+// Lit les données depuis assets/js/planning-data.js (const SESSIONS)
+// =============================================
 
 function renderPlanning() {
     const tbody = document.getElementById('planning-body');

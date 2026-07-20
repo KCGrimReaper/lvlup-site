@@ -179,6 +179,67 @@
     </div>
 </div>
 
+<hr style="border:none; border-top:1px solid var(--border-soft); margin:3.5rem 0;">
+
+<div class="admin-header">
+    <h1>Planning des sessions</h1>
+    <p>Même principe : ajoute, modifie ou supprime une date de session sans toucher au code.</p>
+</div>
+
+<div class="admin-layout">
+    <div class="panel">
+        <h2>Sessions actuelles</h2>
+        <div id="session-list"></div>
+        <button class="btn btn-small" id="add-session-btn" style="margin-top:1.3rem;">+ Ajouter une session</button>
+    </div>
+
+    <div class="panel" id="session-form-panel" style="display:none;">
+        <h2 id="session-form-title">Nouvelle session</h2>
+        <form id="session-form">
+            <div class="form-group">
+                <label>Date affichée</label>
+                <input type="text" id="s-date" required placeholder="Ex: 18 - 19 Mai">
+            </div>
+            <div class="form-group">
+                <label>Formation</label>
+                <select id="s-formation" required></select>
+            </div>
+            <div class="form-group">
+                <label>Format / Lieu</label>
+                <input type="text" id="s-format" required placeholder="Ex: Paris / Présentiel, ou Distanciel">
+            </div>
+            <div class="form-group">
+                <label>Statut</label>
+                <select id="s-status">
+                    <option value="ouvert">Ouvert (bouton "S'inscrire")</option>
+                    <option value="complet">Complet (badge "Complet")</option>
+                </select>
+            </div>
+            <div class="copy-row">
+                <button type="submit" class="btn">Enregistrer cette session</button>
+                <button type="button" class="btn btn-secondary" id="session-cancel-btn">Annuler</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="session-output-section" style="display:none; margin-top:2.5rem;">
+    <div class="panel">
+        <h2>Code à copier dans <code>assets/js/planning-data.js</code></h2>
+        <textarea id="session-output-code" readonly></textarea>
+        <div class="copy-row">
+            <button class="btn" id="session-download-btn">Télécharger le fichier</button>
+            <button class="btn btn-secondary" id="session-copy-btn">Copier le code</button>
+            <span class="copy-confirm" id="session-copy-confirm">✓ Copié !</span>
+        </div>
+        <div class="instructions">
+            Même méthode que pour le catalogue de formations : télécharge (recommandé) ou copie-colle
+            dans <strong>planning-data.js</strong> — pas dans <strong>planning-render.js</strong>.
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/planning-data.js"></script>
 <script src="assets/js/formations-data.js"></script>
 <script>
 // FORMATIONS est déjà chargé depuis formations-data.js — c'est le catalogue actuel.
@@ -402,6 +463,138 @@ addStepInput('');
 populateCategorySelect();
 renderList();
 generateOutput();
+
+// =============================================
+// PLANNING DES SESSIONS
+// =============================================
+let editingSessionIndex = null;
+
+function populateFormationSelect() {
+    const select = document.getElementById('s-formation');
+    const current = select.value;
+    select.innerHTML = FORMATIONS.map(f => `<option value="${f.title}">${f.title}</option>`).join('');
+    if (current) select.value = current;
+}
+
+function renderSessionList() {
+    const list = document.getElementById('session-list');
+    if (SESSIONS.length === 0) {
+        list.innerHTML = '<p style="color:var(--ink-soft);font-size:0.9rem;">Aucune session pour l\'instant.</p>';
+        return;
+    }
+    list.innerHTML = SESSIONS.map((s, i) => `
+        <div class="formation-row">
+            <div>
+                <div class="formation-row-title">${s.date} — ${s.formation}</div>
+                <div class="formation-row-meta">${s.format} · ${s.status}</div>
+            </div>
+            <div class="formation-row-actions">
+                <button onclick="editSession(${i})">Modifier</button>
+                <button class="danger" onclick="deleteSession(${i})">Supprimer</button>
+            </div>
+        </div>`).join('');
+}
+
+function resetSessionForm() {
+    document.getElementById('session-form').reset();
+    populateFormationSelect();
+    editingSessionIndex = null;
+    document.getElementById('session-form-title').textContent = 'Nouvelle session';
+}
+
+document.getElementById('add-session-btn').addEventListener('click', () => {
+    resetSessionForm();
+    document.getElementById('session-form-panel').style.display = 'block';
+    document.getElementById('session-form-panel').scrollIntoView({ behavior: 'smooth' });
+});
+
+document.getElementById('session-cancel-btn').addEventListener('click', () => {
+    document.getElementById('session-form-panel').style.display = 'none';
+});
+
+window.editSession = function(index) {
+    const s = SESSIONS[index];
+    if (!s) return;
+    editingSessionIndex = index;
+    document.getElementById('session-form-title').textContent = 'Modifier la session';
+    document.getElementById('s-date').value = s.date;
+    populateFormationSelect();
+    document.getElementById('s-formation').value = s.formation;
+    document.getElementById('s-format').value = s.format;
+    document.getElementById('s-status').value = s.status;
+    document.getElementById('session-form-panel').style.display = 'block';
+    document.getElementById('session-form-panel').scrollIntoView({ behavior: 'smooth' });
+};
+
+window.deleteSession = function(index) {
+    const s = SESSIONS[index];
+    if (!s) return;
+    if (!confirm(`Supprimer la session « ${s.date} — ${s.formation} » ?`)) return;
+    SESSIONS.splice(index, 1);
+    renderSessionList();
+    generateSessionOutput();
+};
+
+document.getElementById('session-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const session = {
+        date: document.getElementById('s-date').value.trim(),
+        formation: document.getElementById('s-formation').value,
+        format: document.getElementById('s-format').value.trim(),
+        status: document.getElementById('s-status').value,
+    };
+    if (editingSessionIndex !== null) {
+        SESSIONS[editingSessionIndex] = session;
+    } else {
+        SESSIONS.push(session);
+    }
+    renderSessionList();
+    generateSessionOutput();
+    document.getElementById('session-form-panel').style.display = 'none';
+});
+
+function generateSessionOutput() {
+    const lines = [];
+    lines.push('// =============================================');
+    lines.push('// ⚠️ C\'EST ICI QUE TU COLLES LE CODE GÉNÉRÉ PAR admin.html (section Planning) ⚠️');
+    lines.push('// (l\'autre fichier, planning-render.js, ne se touche jamais)');
+    lines.push('// =============================================');
+    lines.push('// PLANNING DES SESSIONS — source de données unique');
+    lines.push('// =============================================');
+    lines.push('const SESSIONS = [');
+    SESSIONS.forEach(s => {
+        lines.push(`    { date: ${jsString(s.date)}, formation: ${jsString(s.formation)}, format: ${jsString(s.format)}, status: ${jsString(s.status)} },`);
+    });
+    lines.push('];');
+    document.getElementById('session-output-code').value = lines.join('\n');
+    document.getElementById('session-output-section').style.display = 'block';
+}
+
+document.getElementById('session-copy-btn').addEventListener('click', () => {
+    const textarea = document.getElementById('session-output-code');
+    textarea.select();
+    navigator.clipboard.writeText(textarea.value).then(() => {
+        const confirm = document.getElementById('session-copy-confirm');
+        confirm.style.display = 'inline';
+        setTimeout(() => confirm.style.display = 'none', 2000);
+    });
+});
+
+document.getElementById('session-download-btn').addEventListener('click', () => {
+    const content = document.getElementById('session-output-code').value;
+    const blob = new Blob([content], { type: 'text/javascript' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'planning-data.js';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+});
+
+renderSessionList();
+generateSessionOutput();
 </script>
 </body>
 </html>
