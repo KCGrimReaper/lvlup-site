@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LVL UP — Gestion du catalogue de formations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+    body { padding: 2rem 4%; max-width: 1100px; margin: 0 auto; }
+    .admin-header { margin-bottom: 2rem; }
+    .admin-header h1 { font-size: 1.8rem; color: var(--primary-dark); margin-bottom: 0.4rem; }
+    .admin-header p { color: var(--ink-soft); }
+    .admin-banner {
+        background: #fdecc8; border: 1px solid #e8bd6b; color: #6b4c0f;
+        padding: 1rem 1.3rem; border-radius: 8px; margin-bottom: 2rem; font-size: 0.92rem; line-height: 1.5;
+    }
+    .admin-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+    @media (max-width: 900px) { .admin-layout { grid-template-columns: 1fr; } }
+
+    .panel { background: white; border-radius: 10px; box-shadow: 0 4px 16px rgba(11,37,48,0.06); padding: 1.8rem; }
+    .panel h2 { font-size: 1.15rem; color: var(--primary-dark); margin-bottom: 1.2rem; text-align: left; }
+
+    .formation-row {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 0.9rem 0; border-bottom: 1px solid var(--paper-alt);
+    }
+    .formation-row:last-child { border-bottom: none; }
+    .formation-row-title { font-weight: 600; color: var(--ink); }
+    .formation-row-meta { font-size: 0.8rem; color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; }
+    .formation-row-actions button {
+        background: none; border: none; cursor: pointer; font-size: 0.85rem;
+        color: var(--primary); font-weight: 600; margin-left: 0.8rem;
+    }
+    .formation-row-actions button.danger { color: #b5453a; }
+
+    .form-group { margin-bottom: 1.3rem; }
+    .form-group label { display: block; font-weight: 600; color: var(--primary-dark); margin-bottom: 0.4rem; font-size: 0.92rem; }
+    .form-group input, .form-group textarea, .form-group select {
+        width: 100%; padding: 0.7rem 0.9rem; border: 1px solid var(--border-soft); border-radius: 6px;
+        font-size: 0.95rem; font-family: inherit; background: var(--paper);
+    }
+    .form-hint { font-size: 0.78rem; color: var(--ink-soft); margin-top: 0.3rem; }
+    .form-row { display: flex; gap: 1rem; }
+    .form-row .form-group { flex: 1; }
+
+    .step-row { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .step-row input { flex: 1; }
+    .step-row button { background: #f3e3e1; color: #b5453a; border: none; border-radius: 6px; padding: 0 0.9rem; cursor: pointer; font-weight: 700; }
+    #add-step-btn { margin-top: 0.3rem; }
+
+    .btn-secondary { background: var(--paper-alt); color: var(--ink); }
+    .btn-secondary:hover { background: var(--border-soft); }
+
+    #output-section { margin-top: 2.5rem; }
+    #output-code {
+        width: 100%; min-height: 220px; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem;
+        background: var(--primary-dark); color: #c8e6d8; padding: 1.2rem; border-radius: 8px; border: none;
+        line-height: 1.5;
+    }
+    .copy-row { display: flex; gap: 1rem; align-items: center; margin-top: 1rem; flex-wrap: wrap; }
+    .copy-confirm { color: #196c43; font-weight: 600; font-size: 0.9rem; display: none; }
+
+    .instructions { margin-top: 1.5rem; background: var(--paper); border-radius: 8px; padding: 1.3rem 1.5rem; }
+    .instructions ol { margin-left: 1.2rem; line-height: 1.9; color: var(--ink-soft); }
+    .instructions strong { color: var(--ink); }
+    code { background: var(--paper-alt); padding: 0.15rem 0.4rem; border-radius: 4px; font-family: 'IBM Plex Mono', monospace; font-size: 0.85em; }
+
+    #form-panel { display: none; }
+</style>
+</head>
+<body>
+
+<div class="admin-header">
+    <h1>Gestion du catalogue de formations</h1>
+    <p>Ajoute, modifie ou supprime une formation sans toucher au code. Aucune donnée n'est envoyée nulle part — tout reste dans cette page, dans ton navigateur.</p>
+</div>
+
+<div class="admin-banner">
+    ⚠️ Cet outil ne publie rien tout seul. Il te génère le code à copier-coller
+    dans <code>assets/js/formations-data.js</code>, à sauvegarder, puis à
+    envoyer sur GitHub (toi-même ou en le demandant à Claude). C'est une page
+    de travail, pas une page du site — ne l'ajoute pas au menu du site public.
+</div>
+
+<div class="admin-layout">
+    <div class="panel">
+        <h2>Formations actuelles</h2>
+        <div id="formation-list"></div>
+        <button class="btn btn-small" id="add-new-btn" style="margin-top:1.3rem;">+ Ajouter une formation</button>
+    </div>
+
+    <div class="panel" id="form-panel">
+        <h2 id="form-title">Nouvelle formation</h2>
+        <form id="formation-form">
+            <div class="form-group">
+                <label>Titre</label>
+                <input type="text" id="f-title" required placeholder="Ex: Leading SAFe® 6.0">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Catégorie</label>
+                    <select id="f-category">
+                        <option value="safe">SAFe</option>
+                        <option value="lean">Lean</option>
+                        <option value="strategie">Stratégie</option>
+                    </select>
+                    <div class="form-hint">Une nouvelle catégorie ? Dis-le moi, j'ajoute le filtre correspondant.</div>
+                </div>
+                <div class="form-group">
+                    <label>Tarif affiché</label>
+                    <input type="text" id="f-tarif" placeholder="à partir de 670€ HT">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label><input type="checkbox" id="f-certifiant" style="width:auto;display:inline;margin-right:0.4rem;">Formation certifiante</label>
+                </div>
+                <div class="form-group">
+                    <label>Niveau / type</label>
+                    <input type="text" id="f-niveau" placeholder="Avancé, Tous niveaux, Initiation...">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Description courte (affichée sur la carte)</label>
+                <textarea id="f-description" rows="2" required></textarea>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Durée</label>
+                    <input type="text" id="f-duree" placeholder="2 jours (16h)">
+                </div>
+                <div class="form-group">
+                    <label>Format</label>
+                    <input type="text" id="f-format" placeholder="Présentiel ou Distanciel">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Étapes du programme (fiche détaillée)</label>
+                <div id="steps-container"></div>
+                <button type="button" class="btn btn-small btn-secondary" id="add-step-btn">+ Ajouter une étape</button>
+            </div>
+            <div class="form-group">
+                <label>Texte du bouton de contact</label>
+                <input type="text" id="f-cta-label" placeholder="Demander un devis certifiant">
+            </div>
+            <div class="form-group">
+                <label>Message pré-rempli quand on clique ce bouton</label>
+                <textarea id="f-cta-message" rows="2" placeholder="Bonjour, je souhaiterais recevoir un devis pour..."></textarea>
+            </div>
+            <div class="copy-row">
+                <button type="submit" class="btn">Enregistrer cette formation</button>
+                <button type="button" class="btn btn-secondary" id="cancel-btn">Annuler</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="output-section" style="display:none;">
+    <div class="panel">
+        <h2>Code à copier dans <code>assets/js/formations-data.js</code></h2>
+        <textarea id="output-code" readonly></textarea>
+        <div class="copy-row">
+            <button class="btn" id="copy-btn">Copier le code</button>
+            <span class="copy-confirm" id="copy-confirm">✓ Copié !</span>
+        </div>
+        <div class="instructions">
+            <strong>Pour publier ce changement :</strong>
+            <ol>
+                <li>Clique <strong>« Copier le code »</strong> ci-dessus.</li>
+                <li>Ouvre <code>assets/js/formations-data.js</code> dans VS Code.</li>
+                <li>Sélectionne tout le contenu (<code>Ctrl+A</code>) et colle (<code>Ctrl+V</code>) pour remplacer.</li>
+                <li>Sauvegarde (<code>Ctrl+S</code>).</li>
+                <li>Dans le terminal : <code>git add -A && git commit -m "Mise à jour catalogue" && git push</code></li>
+            </ol>
+            Tu peux aussi coller ce code directement dans le chat à Claude et lui demander de sauvegarder et pousser pour toi.
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/formations-data.js"></script>
+<script>
+// FORMATIONS est déjà chargé depuis formations-data.js — c'est le catalogue actuel.
+let editingId = null; // null = ajout, sinon = id de la formation en cours d'édition
+
+function renderList() {
+    const list = document.getElementById('formation-list');
+    if (FORMATIONS.length === 0) {
+        list.innerHTML = '<p style="color:var(--ink-soft);font-size:0.9rem;">Aucune formation pour l\'instant.</p>';
+        return;
+    }
+    list.innerHTML = FORMATIONS.map(f => `
+        <div class="formation-row">
+            <div>
+                <div class="formation-row-title">${f.title}</div>
+                <div class="formation-row-meta">${f.category} · ${f.id}</div>
+            </div>
+            <div class="formation-row-actions">
+                <button onclick="editFormation('${f.id}')">Modifier</button>
+                <button class="danger" onclick="deleteFormation('${f.id}')">Supprimer</button>
+            </div>
+        </div>`).join('');
+}
+
+function slugify(str) {
+    return str.toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+function resetForm() {
+    document.getElementById('formation-form').reset();
+    document.getElementById('steps-container').innerHTML = '';
+    addStepInput('');
+    editingId = null;
+    document.getElementById('form-title').textContent = 'Nouvelle formation';
+}
+
+function addStepInput(value) {
+    const container = document.getElementById('steps-container');
+    const row = document.createElement('div');
+    row.className = 'step-row';
+    row.innerHTML = `<input type="text" value="${value.replace(/"/g,'&quot;')}" placeholder="Ex: Introduction à la Business Agility">
+                      <button type="button" onclick="this.parentElement.remove()">✕</button>`;
+    container.appendChild(row);
+}
+
+document.getElementById('add-step-btn').addEventListener('click', () => addStepInput(''));
+
+document.getElementById('add-new-btn').addEventListener('click', () => {
+    resetForm();
+    document.getElementById('form-panel').style.display = 'block';
+    document.getElementById('form-panel').scrollIntoView({ behavior: 'smooth' });
+});
+
+document.getElementById('cancel-btn').addEventListener('click', () => {
+    document.getElementById('form-panel').style.display = 'none';
+});
+
+window.editFormation = function(id) {
+    const f = FORMATIONS.find(x => x.id === id);
+    if (!f) return;
+    editingId = id;
+    document.getElementById('form-title').textContent = 'Modifier : ' + f.title;
+    document.getElementById('f-title').value = f.title;
+    document.getElementById('f-category').value = f.category;
+    document.getElementById('f-description').value = f.description;
+    document.getElementById('f-duree').value = f.duree;
+    document.getElementById('f-format').value = f.format;
+    document.getElementById('f-cta-label').value = f.ctaLabel;
+    document.getElementById('f-cta-message').value = f.ctaMessage;
+
+    const certifiant = f.badges.find(b => b.type === 'certifiant');
+    const niveau = f.badges.find(b => b.type === 'niveau' || b.type === 'pratique');
+    const tarif = f.badges.find(b => b.type === 'tarif');
+    document.getElementById('f-certifiant').checked = !!certifiant;
+    document.getElementById('f-niveau').value = niveau ? niveau.label : '';
+    document.getElementById('f-tarif').value = tarif ? tarif.label : '';
+
+    document.getElementById('steps-container').innerHTML = '';
+    f.programme.forEach(step => addStepInput(step));
+
+    document.getElementById('form-panel').style.display = 'block';
+    document.getElementById('form-panel').scrollIntoView({ behavior: 'smooth' });
+};
+
+window.deleteFormation = function(id) {
+    const f = FORMATIONS.find(x => x.id === id);
+    if (!f) return;
+    if (!confirm(`Supprimer « ${f.title} » ? Cette action ne sera effective qu'après avoir copié le code généré et l'avoir sauvegardé dans le fichier.`)) return;
+    const idx = FORMATIONS.findIndex(x => x.id === id);
+    if (idx !== -1) FORMATIONS.splice(idx, 1);
+    renderList();
+    generateOutput();
+};
+
+document.getElementById('formation-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const title = document.getElementById('f-title').value.trim();
+    const category = document.getElementById('f-category').value;
+    const description = document.getElementById('f-description').value.trim();
+    const duree = document.getElementById('f-duree').value.trim();
+    const format = document.getElementById('f-format').value.trim();
+    const ctaLabel = document.getElementById('f-cta-label').value.trim() || 'En savoir plus';
+    const ctaMessage = document.getElementById('f-cta-message').value.trim();
+    const niveauVal = document.getElementById('f-niveau').value.trim();
+    const tarifVal = document.getElementById('f-tarif').value.trim();
+    const certifiant = document.getElementById('f-certifiant').checked;
+    const steps = [...document.querySelectorAll('#steps-container input')].map(i => i.value.trim()).filter(Boolean);
+
+    const badges = [];
+    if (certifiant) badges.push({ type: 'certifiant', label: 'Certifiant' });
+    if (niveauVal) badges.push({ type: niveauVal.toLowerCase().includes('initiation') ? 'pratique' : 'niveau', label: niveauVal });
+    if (tarifVal) badges.push({ type: 'tarif', label: tarifVal });
+
+    const id = editingId || slugify(title) || ('formation-' + Date.now());
+
+    const formation = { id, category, title, badges, description, duree, format, programme: steps, ctaLabel, ctaMessage };
+
+    if (editingId) {
+        const idx = FORMATIONS.findIndex(x => x.id === editingId);
+        FORMATIONS[idx] = formation;
+    } else {
+        FORMATIONS.push(formation);
+    }
+
+    renderList();
+    generateOutput();
+    document.getElementById('form-panel').style.display = 'none';
+});
+
+function jsString(str) {
+    return JSON.stringify(str || '');
+}
+
+function generateOutput() {
+    const lines = [];
+    lines.push('// =============================================');
+    lines.push('// CATALOGUE DE FORMATIONS — source de données unique');
+    lines.push('// =============================================');
+    lines.push('// Généré via admin.html. Pour éditer à nouveau, ouvre admin.html');
+    lines.push('// dans le navigateur (Live Server) — il relit ce fichier automatiquement.');
+    lines.push('const FORMATIONS = [');
+    FORMATIONS.forEach(f => {
+        lines.push('    {');
+        lines.push(`        id: ${jsString(f.id)},`);
+        lines.push(`        category: ${jsString(f.category)},`);
+        lines.push(`        title: ${jsString(f.title)},`);
+        lines.push('        badges: [');
+        f.badges.forEach(b => lines.push(`            { type: ${jsString(b.type)}, label: ${jsString(b.label)} },`));
+        lines.push('        ],');
+        lines.push(`        description: ${jsString(f.description)},`);
+        lines.push(`        duree: ${jsString(f.duree)},`);
+        lines.push(`        format: ${jsString(f.format)},`);
+        lines.push('        programme: [');
+        f.programme.forEach(step => lines.push(`            ${jsString(step)},`));
+        lines.push('        ],');
+        lines.push(`        ctaLabel: ${jsString(f.ctaLabel)},`);
+        lines.push(`        ctaMessage: ${jsString(f.ctaMessage)},`);
+        lines.push('    },');
+    });
+    lines.push('];');
+    document.getElementById('output-code').value = lines.join('\n');
+    document.getElementById('output-section').style.display = 'block';
+}
+
+document.getElementById('copy-btn').addEventListener('click', () => {
+    const textarea = document.getElementById('output-code');
+    textarea.select();
+    navigator.clipboard.writeText(textarea.value).then(() => {
+        const confirm = document.getElementById('copy-confirm');
+        confirm.style.display = 'inline';
+        setTimeout(() => confirm.style.display = 'none', 2000);
+    });
+});
+
+// Init
+addStepInput('');
+renderList();
+</script>
+</body>
+</html>

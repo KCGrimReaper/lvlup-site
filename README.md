@@ -28,14 +28,17 @@ La table se reconstruit toute seule au chargement de la page.
 
 ## Ajouter / modifier / supprimer une formation
 
-Tout se passe dans `assets/js/formations.js`, tableau `FORMATIONS` en haut du
-fichier. Chaque formation est un seul objet — la carte dans la grille **et**
-sa fiche modale (durée, format, programme, bouton de contact) sont générées
-automatiquement à partir de ce même objet, rien à dupliquer.
+**Sans toucher au code** : ouvre `admin.html` avec Live Server (clic droit →
+Open with Live Server, comme pour `index.html`). C'est un formulaire — titre,
+prix, description, étapes du programme, etc. Il affiche le catalogue actuel,
+tu modifies/ajoutes/supprimes, puis il génère le code à copier-coller dans
+`assets/js/formations-data.js` (instructions affichées sur la page). C'est un
+outil de travail local, il ne fait pas partie du site public.
 
-- **Ajouter** : copie un objet existant, donne-lui un `id` unique, remplis les champs.
-- **Modifier** : édite les champs de l'objet concerné.
-- **Supprimer** : supprime l'objet.
+**Pour un développeur** : les données vivent dans `assets/js/formations-data.js`,
+tableau `FORMATIONS`. Chaque formation est un seul objet — la carte dans la
+grille **et** sa fiche modale sont générées automatiquement à partir de ce
+même objet par `assets/js/formations.js`, rien à dupliquer.
 
 `category` doit être `safe`, `lean` ou `strategie` pour matcher un chip de
 filtre existant. Pour une nouvelle catégorie, ajoute le chip correspondant

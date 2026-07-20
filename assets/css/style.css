@@ -107,11 +107,11 @@ h2 { font-size: 2.3rem; color: var(--primary-dark); margin-bottom: 0.9rem; text-
 .hero-bg > span:nth-child(3) { height: 37%; opacity: 0.22; }
 .hero-bg > span:nth-child(4) { height: 52%; opacity: 0.28; }
 .hero-bg > span:nth-child(5) { height: 68%; opacity: 0.36; }
-.hero-bg > span:nth-child(6) { height: 86%; opacity: 0.46; }
-.hero-plus-cloud { position: absolute; inset: 0; }
-.hero-plus-cloud span {
-    position: absolute; color: var(--accent); font-family: 'Space Grotesk', sans-serif;
-    font-weight: 600; line-height: 1;
+.hero-bg > span:nth-child(6) { height: 86%; opacity: 0.46; position: relative; }
+.bar-signature i {
+    position: absolute; font-style: normal; color: var(--accent);
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600; line-height: 1;
+    pointer-events: none;
 }
 .hero-content { position: relative; z-index: 2; }
 .hero h1 { font-size: 3.4rem; margin-bottom: 1.5rem; max-width: 780px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em; }
