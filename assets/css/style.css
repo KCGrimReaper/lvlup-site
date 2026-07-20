@@ -149,6 +149,7 @@ h2 { font-size: 2.3rem; color: var(--primary-dark); margin-bottom: 0.9rem; text-
 .card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(11,37,48,0.1); }
 .card h3 { color: var(--primary-dark); margin-bottom: 0.7rem; font-size: 1.2rem; }
 .card p { color: var(--ink-soft); line-height: 1.55; }
+.card-footer { margin-top: 1.4rem; }
 .badges { display: flex; gap: 0.5rem; margin-bottom: 1.4rem; flex-wrap: wrap; }
 .badge {
     font-family: 'IBM Plex Mono', monospace;
@@ -241,11 +242,14 @@ h2 { font-size: 2.3rem; color: var(--primary-dark); margin-bottom: 0.9rem; text-
     font-weight: 700; font-size: 0.85rem; border: 1px solid var(--border-soft);
 }
 .certif-tags span::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-.about-image { flex-shrink: 0; }
+.about-image { flex-shrink: 0; text-align: center; }
 .about-image img {
     width: 240px; height: 280px; object-fit: cover; border-radius: 12px;
     box-shadow: 0 16px 32px rgba(11,37,48,0.15); border: 6px solid white;
 }
+.about-caption { margin-top: 1rem; }
+.about-caption strong { display: block; color: var(--primary-dark); font-size: 1.05rem; }
+.about-caption span { display: block; color: var(--ink-soft); font-size: 0.85rem; margin-top: 0.15rem; }
 
 /* =============================================
    FORMULAIRE
