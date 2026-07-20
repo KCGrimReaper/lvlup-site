@@ -4,44 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LVL UP - Transformation et Agilite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-    <!-- Bouton hamburger (mobile) -->
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-    </button>
-    <!-- Overlay sombre -->
-    <div class="sidebar-overlay" id="sidebar-overlay"></div>
-
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-logo-box">
-            <img src="assets/img/logo-lvlup.png" alt="Logo LVL UP">
+    <header class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <a href="#accueil" class="navbar-logo">
+                <img src="assets/img/logo-lvlup.png" alt="LVL UP">
+            </a>
+            <nav class="navbar-nav">
+                <ul>
+                    <li><a href="#formations">Formations</a></li>
+                    <li><a href="#planning">Planning</a></li>
+                    <li><a href="#coaching">Coaching</a></li>
+                    <li><a href="#apropos">À propos</a></li>
+                </ul>
+            </nav>
+            <a href="#contact" class="btn btn-small navbar-cta">Nous contacter</a>
+            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
         </div>
-        <nav>
+        <nav class="navbar-mobile" id="navbar-mobile">
             <ul>
                 <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#formations">Formation</a></li>
+                <li><a href="#formations">Formations</a></li>
                 <li><a href="#planning">Planning</a></li>
                 <li><a href="#coaching">Coaching</a></li>
                 <li><a href="#apropos">À propos</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
-        <div class="sidebar-footer">
-            <a href="#contact" class="btn-small">Nous contacter</a>
-        </div>
-    </aside>
+    </header>
 
-    <main class="content">
+    <main>
         
         <section id="accueil" class="hero">
-            <h1>Et si votre organisation passait au niveau supérieur ?</h1>
-            <p>Face à la complexité, la rigidité n'est plus une option. De la stratégie à l'exécution, LVL UP vous accompagne pour repenser vos façons de travailler. Que vous soyez un grand groupe ou une structure en pleine croissance, nous construisons ensemble une organisation adaptable grâce au pragmatisme du Lean et de l'Agilité.</p>
-            <div class="hero-buttons">
-                <a href="#formations" class="btn">Voir les formations</a>
-                <a href="#coaching" class="btn btn-outline">Découvrir le coaching</a>
+            <div class="hero-bg" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="hero-content">
+                <span class="eyebrow">Formation & coaching Lean-Agile</span>
+                <h1>Et si votre organisation passait au niveau supérieur ?</h1>
+                <p>Face à la complexité, la rigidité n'est plus une option. De la stratégie à l'exécution, LVL UP vous accompagne pour repenser vos façons de travailler. Que vous soyez un grand groupe ou une structure en pleine croissance, nous construisons ensemble une organisation adaptable grâce au pragmatisme du Lean et de l'Agilité.</p>
+                <div class="hero-buttons">
+                    <a href="#formations" class="btn">Voir les formations</a>
+                    <a href="#coaching" class="btn btn-outline">Découvrir le coaching</a>
+                </div>
             </div>
         </section>
 
@@ -298,7 +311,7 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="assets/img/photo-profil.png" alt="Portrait" width="180" height="200" style="border-radius: 8px; object-fit: cover; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 6px solid white;">
+                    <img src="assets/img/photo-profil.png" alt="Portrait">
                 </div>
             </div>
         </section>

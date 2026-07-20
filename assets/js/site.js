@@ -42,7 +42,7 @@ contactFromModalBtns.forEach(btn => {
 });
 
 // --- Navigation smooth scroll ---
-document.querySelectorAll('.sidebar nav a').forEach(anchor => {
+document.querySelectorAll('.navbar-nav a, .navbar-mobile a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
         document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
@@ -51,21 +51,16 @@ document.querySelectorAll('.sidebar nav a').forEach(anchor => {
 
 // --- Menu hamburger (mobile) ---
 const hamburger = document.getElementById('hamburger');
-const sidebar = document.getElementById('sidebar');
-const overlay = document.getElementById('sidebar-overlay');
+const navbarMobile = document.getElementById('navbar-mobile');
 
 function toggleMenu(open) {
     hamburger.classList.toggle('open', open);
-    sidebar.classList.toggle('open', open);
-    overlay.classList.toggle('active', open);
-    document.body.style.overflow = open ? 'hidden' : '';
+    hamburger.setAttribute('aria-expanded', open);
+    navbarMobile.classList.toggle('open', open);
 }
 
-hamburger.addEventListener('click', () => toggleMenu(!sidebar.classList.contains('open')));
-overlay.addEventListener('click', () => toggleMenu(false));
+hamburger.addEventListener('click', () => toggleMenu(!navbarMobile.classList.contains('open')));
 
-document.querySelectorAll('.sidebar nav a').forEach(link => {
-    link.addEventListener('click', () => {
-        if (window.innerWidth <= 1024) toggleMenu(false);
-    });
+navbarMobile.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => toggleMenu(false));
 });

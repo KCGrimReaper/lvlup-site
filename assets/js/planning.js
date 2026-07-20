@@ -16,7 +16,7 @@ function renderPlanning() {
 
     tbody.innerHTML = SESSIONS.map(s => {
         const actionCell = s.status === "complet"
-            ? `<td class="txt-complet">Session complète</td>`
+            ? `<td><span class="status-badge status-full">Complet</span></td>`
             : `<td><button class="btn-small enroll-btn" data-course="${s.formation} (${s.date})">S'inscrire</button></td>`;
 
         return `<tr>
