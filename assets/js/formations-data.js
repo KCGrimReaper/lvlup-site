@@ -1,4 +1,7 @@
 // =============================================
+// ⚠️ C'EST ICI QUE TU COLLES LE CODE GÉNÉRÉ PAR admin.html ⚠️
+// (l'autre fichier, formations-render.js, ne se touche jamais)
+// =============================================
 // CATALOGUE DE FORMATIONS — source de données unique
 // =============================================
 // Pour AJOUTER une formation : copie un objet ci-dessous, change l'id (unique,

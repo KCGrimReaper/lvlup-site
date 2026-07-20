@@ -3,7 +3,7 @@
 // =============================================
 
 // --- Modales (délégation : fonctionne même pour les modales générées
-//     dynamiquement par formations.js, peu importe l'ordre de chargement) ---
+//     dynamiquement par formations-render.js, peu importe l'ordre de chargement) ---
 const messageTextarea = document.getElementById('message');
 const subjectSelect = document.getElementById('sujet');
 

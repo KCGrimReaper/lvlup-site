@@ -1,4 +1,7 @@
 // =============================================
+// ⚠️ NE COLLE JAMAIS LE CODE GÉNÉRÉ PAR admin.html ICI ⚠️
+// (ça va dans formations-data.js, pas dans ce fichier)
+// =============================================
 // AFFICHAGE DU CATALOGUE DE FORMATIONS
 // Lit les données depuis assets/js/formations-data.js (const FORMATIONS)
 // Ne pas éditer ce fichier pour ajouter/modifier une formation :

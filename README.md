@@ -4,12 +4,14 @@ Site vitrine statique (HTML/CSS/JS, sans build). Structure :
 
 ```
 index.html
+admin.html                 -> outil de gestion du catalogue (formulaire, sans code)
 assets/
-  css/style.css     -> tous les styles
-  js/site.js        -> nav, modales, formulaire, menu mobile
-  js/planning.js     -> table du planning des sessions (voir plus bas)
-  js/arcade.js       -> moteur du jeu "LVL UP Adventure"
-  img/               -> logo, photo
+  css/style.css            -> tous les styles
+  js/site.js               -> nav, modales, formulaire, menu mobile
+  js/planning.js           -> table du planning des sessions (voir plus bas)
+  js/formations-data.js    -> catalogue de formations (données à éditer)
+  js/formations-render.js  -> affichage du catalogue (ne pas éditer)
+  img/                     -> logo, photo
 ```
 
 ## Mettre à jour le planning des sessions
@@ -38,7 +40,7 @@ outil de travail local, il ne fait pas partie du site public.
 **Pour un développeur** : les données vivent dans `assets/js/formations-data.js`,
 tableau `FORMATIONS`. Chaque formation est un seul objet — la carte dans la
 grille **et** sa fiche modale sont générées automatiquement à partir de ce
-même objet par `assets/js/formations.js`, rien à dupliquer.
+même objet par `assets/js/formations-render.js`, rien à dupliquer.
 
 `category` doit être `safe`, `lean` ou `strategie` pour matcher un chip de
 filtre existant. Pour une nouvelle catégorie, ajoute le chip correspondant
