@@ -41,7 +41,11 @@ h1, h2, h3, h4, .navbar-logo, .btn, .eyebrow {
     display: flex; align-items: center; justify-content: space-between;
     padding: 0.7rem 5%;
 }
-.navbar-logo img { height: 40px; display: block; }
+.navbar-logo {
+    background: var(--paper); padding: 0.4rem 0.9rem; border-radius: 8px;
+    display: inline-flex; align-items: center;
+}
+.navbar-logo img { height: 34px; display: block; }
 .navbar-nav ul { list-style: none; display: flex; gap: 2.2rem; }
 .navbar-nav a {
     text-decoration: none; color: #cbd5d4; font-weight: 500; font-size: 0.98rem;
