@@ -33,44 +33,42 @@ h1, h2, h3, h4, .navbar-logo, .btn, .eyebrow {
 ============================================= */
 .navbar {
     position: sticky; top: 0; z-index: 100;
-    background: var(--primary-dark);
-    box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+    background: var(--white);
+    border-bottom: 1px solid var(--border-soft);
+    box-shadow: 0 2px 16px rgba(11,37,48,0.05);
 }
 .navbar-inner {
     max-width: 1280px; margin: 0 auto;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0.7rem 5%;
+    padding: 0.6rem 5%;
 }
-.navbar-logo {
-    background: var(--paper); padding: 0.4rem 0.9rem; border-radius: 8px;
-    display: inline-flex; align-items: center;
-}
-.navbar-logo img { height: 34px; display: block; }
+.navbar-logo { display: inline-flex; align-items: center; }
+.navbar-logo img { height: 52px; display: block; }
 .navbar-nav ul { list-style: none; display: flex; gap: 2.2rem; }
 .navbar-nav a {
-    text-decoration: none; color: #cbd5d4; font-weight: 500; font-size: 0.98rem;
+    text-decoration: none; color: var(--ink-soft); font-weight: 500; font-size: 0.98rem;
     transition: color 0.2s;
 }
-.navbar-nav a:hover { color: var(--white); }
+.navbar-nav a:hover { color: var(--primary); }
 .navbar-cta { white-space: nowrap; }
 
 .hamburger {
     display: none; background: none; border: none; cursor: pointer;
     flex-direction: column; gap: 5px; padding: 0.4rem;
 }
-.hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.3s; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--primary-dark); border-radius: 2px; transition: all 0.3s; }
 .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 .navbar-mobile {
-    display: none; background: var(--primary-dark); border-top: 1px solid rgba(255,255,255,0.08);
+    display: none; background: var(--white); border-top: 1px solid var(--border-soft);
     max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
 }
 .navbar-mobile.open { max-height: 400px; }
 .navbar-mobile ul { list-style: none; padding: 0.5rem 5% 1.2rem; }
 .navbar-mobile li { margin-top: 1rem; }
-.navbar-mobile a { color: #cbd5d4; text-decoration: none; font-weight: 500; font-size: 1.05rem; }
+.navbar-mobile a { color: var(--ink-soft); text-decoration: none; font-weight: 500; font-size: 1.05rem; }
 
 /* =============================================
    LAYOUT / TYPO GÉNÉRALE
