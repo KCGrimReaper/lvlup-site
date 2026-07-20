@@ -292,11 +292,6 @@
             .certif-tags { justify-content: center; }
             .about-text { font-size: 1rem; }
 
-            /* BAQ Map responsive */
-            #arcade .baq-layout { grid-template-columns: 1fr !important; }
-            #baq-map { position: static !important; }
-            #map-canvas { height: 200px !important; }
-
             /* Formulaire */
             .contact-form-container { padding: 2rem 1.25rem; border-radius: 8px; }
             .form-group input, .form-group textarea, .form-group select { font-size: 1rem; }

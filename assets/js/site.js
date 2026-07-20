@@ -49,11 +49,6 @@ document.querySelectorAll('.sidebar nav a').forEach(anchor => {
     });
 });
 
-// --- Empêche le scroll de la page avec Espace (utilisée par le jeu) ---
-window.addEventListener('keydown', function(e) {
-    if (e.code === 'Space' && e.target === document.body) e.preventDefault();
-});
-
 // --- Menu hamburger (mobile) ---
 const hamburger = document.getElementById('hamburger');
 const sidebar = document.getElementById('sidebar');
