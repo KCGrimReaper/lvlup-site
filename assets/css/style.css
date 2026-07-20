@@ -101,13 +101,18 @@ h2 { font-size: 2.3rem; color: var(--primary-dark); margin-bottom: 0.9rem; text-
     gap: 0.9rem; padding: 0 6% 0 0;
     opacity: 0.9;
 }
-.hero-bg span { display: block; width: 34px; border-radius: 3px 3px 0 0; background: var(--accent); }
-.hero-bg span:nth-child(1) { height: 14%; opacity: 0.12; }
-.hero-bg span:nth-child(2) { height: 24%; opacity: 0.16; }
-.hero-bg span:nth-child(3) { height: 37%; opacity: 0.22; }
-.hero-bg span:nth-child(4) { height: 52%; opacity: 0.28; }
-.hero-bg span:nth-child(5) { height: 68%; opacity: 0.36; }
-.hero-bg span:nth-child(6) { height: 86%; opacity: 0.46; }
+.hero-bg > span { display: block; width: 34px; border-radius: 3px 3px 0 0; background: var(--accent); }
+.hero-bg > span:nth-child(1) { height: 14%; opacity: 0.12; }
+.hero-bg > span:nth-child(2) { height: 24%; opacity: 0.16; }
+.hero-bg > span:nth-child(3) { height: 37%; opacity: 0.22; }
+.hero-bg > span:nth-child(4) { height: 52%; opacity: 0.28; }
+.hero-bg > span:nth-child(5) { height: 68%; opacity: 0.36; }
+.hero-bg > span:nth-child(6) { height: 86%; opacity: 0.46; }
+.hero-plus-cloud { position: absolute; inset: 0; }
+.hero-plus-cloud span {
+    position: absolute; color: var(--accent); font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; line-height: 1;
+}
 .hero-content { position: relative; z-index: 2; }
 .hero h1 { font-size: 3.4rem; margin-bottom: 1.5rem; max-width: 780px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em; }
 .hero p { font-size: 1.22rem; max-width: 640px; color: #cfe0e0; margin-bottom: 2.6rem; line-height: 1.6; }
@@ -151,23 +156,21 @@ h2 { font-size: 2.3rem; color: var(--primary-dark); margin-bottom: 0.9rem; text-
 .badge.tarif { background-color: #dcf0e4; color: #196c43; }
 
 /* =============================================
-   CATÉGORIES DE FORMATION
+   FILTRES FORMATIONS
 ============================================= */
-.category-wrapper { margin-bottom: 3rem; }
-.formation-category {
-    background: white; margin-bottom: 1rem; border-radius: 8px;
-    box-shadow: 0 3px 12px rgba(11,37,48,0.05); border-left: 5px solid var(--primary-mid);
+.filter-chips { display: flex; gap: 0.7rem; justify-content: center; margin-bottom: 2.8rem; flex-wrap: wrap; }
+.chip {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.9rem;
+    background: white; color: var(--ink-soft); border: 1.5px solid var(--border-soft);
+    padding: 0.6rem 1.3rem; border-radius: 50px; cursor: pointer; transition: all 0.2s;
 }
-.formation-category summary {
-    padding: 1.4rem 1.6rem; font-size: 1.22rem; font-weight: 700; cursor: pointer;
-    color: var(--primary-dark); list-style: none;
-    display: flex; justify-content: space-between; align-items: center; margin: 0;
-}
-.formation-category summary::-webkit-details-marker { display: none; }
-.formation-category summary::marker { display: none; content: ""; }
-.formation-category summary::after { content: '+'; color: var(--accent); font-size: 1.5rem; font-weight: 400; }
-.formation-category[open] summary::after { content: '−'; }
-.formation-category[open] .grid { padding: 0.5rem 1.6rem 2rem; }
+.chip:hover { border-color: var(--primary-mid); color: var(--primary); }
+.chip.active { background: var(--primary-dark); border-color: var(--primary-dark); color: white; }
+
+.formation-card { border-top-color: var(--primary-mid); }
+.formation-card.cat-lean { border-top-color: var(--accent); }
+.formation-card.cat-strategie { border-top-color: #6b7bb8; }
+.formation-card.hidden { display: none; }
 
 /* =============================================
    PLANNING

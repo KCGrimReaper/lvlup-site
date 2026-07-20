@@ -46,6 +46,13 @@
         <section id="accueil" class="hero">
             <div class="hero-bg" aria-hidden="true">
                 <span></span><span></span><span></span><span></span><span></span><span></span>
+                <div class="hero-plus-cloud">
+                    <span style="top:8%; right:22%; font-size:0.8rem; opacity:0.5;">+</span>
+                    <span style="top:16%; right:9%; font-size:1.1rem; opacity:0.7;">+</span>
+                    <span style="top:2%; right:12%; font-size:0.6rem; opacity:0.4;">+</span>
+                    <span style="top:24%; right:28%; font-size:0.65rem; opacity:0.35;">+</span>
+                    <span style="top:34%; right:5%; font-size:0.75rem; opacity:0.45;">+</span>
+                </div>
             </div>
             <div class="hero-content">
                 <span class="eyebrow">Formation & coaching Lean-Agile</span>
@@ -62,86 +69,76 @@
             <h2>Formations : Maîtrisez les fondamentaux</h2>
             <p class="subtitle">Des concepts empiriques solides, une mise en pratique 100 % personnalisée.</p>
 
-            <div class="category-wrapper">
-                
-                <details class="formation-category" open>
-                    <summary>SAFe : Business Agility</summary>
-                    <div class="grid">
-                        <div class="card formation-card">
-                            <div class="badges">
-                                <span class="badge certifiant">Certifiant</span>
-                                <span class="badge niveau">Avancé</span>
-                                <span class="badge tarif">à partir de 670€ HT</span>
-                            </div>
-                            <h3>Leading SAFe® 6.0</h3>
-                            <p>Alignez la stratégie et l'exécution. Préparez-vous à mener une transformation Lean-Agile à l'échelle de l'entreprise.</p>
-                            <div class="card-footer">
-                                <button class="btn-small btn-outline open-modal" data-modal="modal-safe">Détails & Programme</button>
-                            </div>
-                        </div>
+            <div class="filter-chips" id="filter-chips">
+                <button class="chip active" data-filter="all">Toutes</button>
+                <button class="chip" data-filter="safe">SAFe</button>
+                <button class="chip" data-filter="lean">Lean</button>
+                <button class="chip" data-filter="strategie">Stratégie</button>
+            </div>
 
-                        <div class="card formation-card">
-                            <div class="badges">
-                                <span class="badge certifiant">Certifiant</span>
-                                <span class="badge niveau">Tous niveaux</span>
-                                <span class="badge tarif">à partir de 670€ HT</span>
-                            </div>
-                            <h3>SAFe® Hardware</h3>
-                            <p>Appliquez les principes agiles au développement de produits physiques. Réduisez votre time-to-market hors du logiciel.</p>
-                            <div class="card-footer">
-                                <button class="btn-small btn-outline open-modal" data-modal="modal-hardware">Détails & Programme</button>
-                            </div>
-                        </div>
-
-                        <div class="card formation-card">
-                            <div class="badges">
-                                <span class="badge certifiant">Certifiant</span>
-                                <span class="badge niveau">Tous niveaux</span>
-                                <span class="badge tarif">à partir de 670€ HT</span>
-                            </div>
-                            <h3>SAFe® PO/PM</h3>
-                            <p>Apprenez en plus sur le Product Management dans un environnement de travail agile à l'échelle.</p>
-                            <div class="card-footer">
-                                <button class="btn-small btn-outline open-modal" data-modal="modal-popm">Détails & Programme</button>
-                            </div>
-                        </div>
+            <div class="grid" id="formations-grid">
+                <div class="card formation-card cat-safe" data-category="safe">
+                    <div class="badges">
+                        <span class="badge certifiant">Certifiant</span>
+                        <span class="badge niveau">Avancé</span>
+                        <span class="badge tarif">à partir de 670€ HT</span>
                     </div>
-                </details>
-
-                <details class="formation-category">
-                    <summary>Lean & Excellence Opérationnelle</summary>
-                    <div class="grid">
-                        <div class="card formation-card">
-                            <div class="badges">
-                                <span class="badge pratique">Initiation</span>
-                                <span class="badge tarif">à partir de 150€ HT</span>
-                            </div>
-                            <h3>Introduction au Lean</h3>
-                            <p>Découvrez comment identifier et éliminer les gaspillages dans vos processus pour gagner en efficacité au quotidien.</p>
-                            <div class="card-footer">
-                                <button class="btn-small btn-outline open-modal" data-modal="modal-lean">Détails & Programme</button>
-                            </div>
-                        </div>
+                    <h3>Leading SAFe® 6.0</h3>
+                    <p>Alignez la stratégie et l'exécution. Préparez-vous à mener une transformation Lean-Agile à l'échelle de l'entreprise.</p>
+                    <div class="card-footer">
+                        <button class="btn-small btn-outline open-modal" data-modal="modal-safe">Détails & Programme</button>
                     </div>
-                </details>
+                </div>
 
-                <details class="formation-category">
-                    <summary>Objectifs & Stratégie</summary>
-                    <div class="grid">
-                        <div class="card formation-card">
-                            <div class="badges">
-                                <span class="badge niveau">Stratégie</span>
-                                <span class="badge tarif">à partir de 450€ HT</span>
-                            </div>
-                            <h3>Maîtriser les OKRs</h3>
-                            <p>Alignez vos équipes sur des objectifs clairs et mesurables. Passez d'une culture de la tâche à une culture du résultat.</p>
-                            <div class="card-footer">
-                                <button class="btn-small btn-outline open-modal" data-modal="modal-okr">Détails & Programme</button>
-                            </div>
-                        </div>
+                <div class="card formation-card cat-safe" data-category="safe">
+                    <div class="badges">
+                        <span class="badge certifiant">Certifiant</span>
+                        <span class="badge niveau">Tous niveaux</span>
+                        <span class="badge tarif">à partir de 670€ HT</span>
                     </div>
-                </details>
+                    <h3>SAFe® Hardware</h3>
+                    <p>Appliquez les principes agiles au développement de produits physiques. Réduisez votre time-to-market hors du logiciel.</p>
+                    <div class="card-footer">
+                        <button class="btn-small btn-outline open-modal" data-modal="modal-hardware">Détails & Programme</button>
+                    </div>
+                </div>
 
+                <div class="card formation-card cat-safe" data-category="safe">
+                    <div class="badges">
+                        <span class="badge certifiant">Certifiant</span>
+                        <span class="badge niveau">Tous niveaux</span>
+                        <span class="badge tarif">à partir de 670€ HT</span>
+                    </div>
+                    <h3>SAFe® PO/PM</h3>
+                    <p>Apprenez en plus sur le Product Management dans un environnement de travail agile à l'échelle.</p>
+                    <div class="card-footer">
+                        <button class="btn-small btn-outline open-modal" data-modal="modal-popm">Détails & Programme</button>
+                    </div>
+                </div>
+
+                <div class="card formation-card cat-lean" data-category="lean">
+                    <div class="badges">
+                        <span class="badge pratique">Initiation</span>
+                        <span class="badge tarif">à partir de 150€ HT</span>
+                    </div>
+                    <h3>Introduction au Lean</h3>
+                    <p>Découvrez comment identifier et éliminer les gaspillages dans vos processus pour gagner en efficacité au quotidien.</p>
+                    <div class="card-footer">
+                        <button class="btn-small btn-outline open-modal" data-modal="modal-lean">Détails & Programme</button>
+                    </div>
+                </div>
+
+                <div class="card formation-card cat-strategie" data-category="strategie">
+                    <div class="badges">
+                        <span class="badge niveau">Stratégie</span>
+                        <span class="badge tarif">à partir de 450€ HT</span>
+                    </div>
+                    <h3>Maîtriser les OKRs</h3>
+                    <p>Alignez vos équipes sur des objectifs clairs et mesurables. Passez d'une culture de la tâche à une culture du résultat.</p>
+                    <div class="card-footer">
+                        <button class="btn-small btn-outline open-modal" data-modal="modal-okr">Détails & Programme</button>
+                    </div>
+                </div>
             </div>
         </section>
 

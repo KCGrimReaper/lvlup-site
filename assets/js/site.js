@@ -41,6 +41,22 @@ contactFromModalBtns.forEach(btn => {
     }
 });
 
+// --- Filtres formations ---
+const chips = document.querySelectorAll('.chip');
+const formationCards = document.querySelectorAll('.formation-card');
+
+chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const filter = chip.getAttribute('data-filter');
+        formationCards.forEach(card => {
+            const match = filter === 'all' || card.getAttribute('data-category') === filter;
+            card.classList.toggle('hidden', !match);
+        });
+    });
+});
+
 // --- Navigation smooth scroll ---
 document.querySelectorAll('.navbar-nav a, .navbar-mobile a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
