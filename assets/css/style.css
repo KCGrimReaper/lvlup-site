@@ -40,10 +40,10 @@ h1, h2, h3, h4, .navbar-logo, .btn, .eyebrow {
 .navbar-inner {
     max-width: 1280px; margin: 0 auto;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0.6rem 5%;
+    padding: 1rem 5%;
 }
 .navbar-logo { display: inline-flex; align-items: center; }
-.navbar-logo img { height: 52px; display: block; }
+.navbar-logo img { height: 46px; display: block; }
 .navbar-nav ul { list-style: none; display: flex; gap: 2.2rem; }
 .navbar-nav a {
     text-decoration: none; color: var(--ink-soft); font-weight: 500; font-size: 0.98rem;
