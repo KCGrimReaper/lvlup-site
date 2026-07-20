@@ -101,14 +101,19 @@ h2 { font-size: 2.3rem; color: var(--primary-dark); margin-bottom: 0.9rem; text-
     gap: 0.9rem; padding: 0 6% 0 0;
     opacity: 0.9;
 }
-.hero-bg > span { display: block; width: 34px; border-radius: 3px 3px 0 0; background: var(--accent); }
-.hero-bg > span:nth-child(1) { height: 14%; opacity: 0.12; }
-.hero-bg > span:nth-child(2) { height: 24%; opacity: 0.16; }
-.hero-bg > span:nth-child(3) { height: 37%; opacity: 0.22; }
-.hero-bg > span:nth-child(4) { height: 52%; opacity: 0.28; }
-.hero-bg > span:nth-child(5) { height: 68%; opacity: 0.36; }
-.hero-bg > span:nth-child(6) { height: 86%; opacity: 0.46; }
-.hero-plus-cloud { position: absolute; inset: 0; }
+.hero-bg { position: absolute; inset: 0; pointer-events: none; opacity: 0.9; }
+.bar-cluster {
+    position: absolute; top: 0; bottom: 0; right: 6%;
+    display: flex; align-items: flex-end; gap: 14.4px;
+}
+.bar-cluster > span { display: block; width: 34px; border-radius: 3px 3px 0 0; background: var(--accent); }
+.bar-cluster > span:nth-child(1) { height: 14%; opacity: 0.12; }
+.bar-cluster > span:nth-child(2) { height: 24%; opacity: 0.16; }
+.bar-cluster > span:nth-child(3) { height: 37%; opacity: 0.22; }
+.bar-cluster > span:nth-child(4) { height: 52%; opacity: 0.28; }
+.bar-cluster > span:nth-child(5) { height: 68%; opacity: 0.36; }
+.bar-cluster > span:nth-child(6) { height: 86%; opacity: 0.46; }
+.hero-plus-cloud { position: absolute; inset: 0; overflow: visible; }
 .hero-plus-cloud span {
     position: absolute; color: var(--accent); font-family: 'Space Grotesk', sans-serif;
     font-weight: 600; line-height: 1; pointer-events: none;
